@@ -5,6 +5,7 @@ from datetime import datetime, timedelta
 from airflow import DAG
 from airflow.providers.http.operators.http import SimpleHttpOperator
 from airflow.operators.python import PythonOperator
+from airflow.hooks.base_hook import BaseHook
 
 default_args = {
     'owner': 'airflow',
@@ -33,10 +34,10 @@ with DAG(
                     dag=dag)
     
     def xcom_check(ds, **kwargs):
-        url = "https://jsonplaceholder.typicode.com/posts/1"
+        url = BaseHook.get_connection('northwind').get_uri() + "/northwind/northwind.svc/Customers?$format=json"
 
         # A GET request to the API
-        response = requests.get("https://services.odata.org/northwind/northwind.svc/Customers?$format=json")
+        response = requests.get(url)
         
         # Print the response
         response_json = response.json()
