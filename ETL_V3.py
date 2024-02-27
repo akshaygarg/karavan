@@ -35,8 +35,8 @@ with DAG(
     
     def xcom_check(ds, **kwargs):
         url = BaseHook.get_connection('northwind').host + '/northwind/northwind.svc/Customers?$format=json';
-        print(url)
-        url = "https://services.odata.org/northwind/northwind.svc/Customers?$format=json"
+        print("The final url is " + url)
+        #url = "https://services.odata.org/northwind/northwind.svc/Customers?$format=json"
 
         
         # A GET request to the API
