@@ -30,10 +30,10 @@ t1 = SimpleHttpOperator(
     dag=dag)
 
 t2 = SimpleHttpOperator(
-    task_id='get_breeds',
+    task_id='get_labrador',
     method='GET',
-    http_conn_id='http_default',
-    endpoint='api/breeds/list',
+    http_conn_id='northwind',
+    endpoint='northwind/northwind.svc/Customers?$format=json',
     headers={"Content-Type": "application/json"},
     dag=dag)
     
