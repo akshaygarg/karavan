@@ -7,17 +7,17 @@ import json
 
 
 default_args = {
-    'owner': 'Loftium',
+    'owner': 'akshay',
     'depends_on_past': False,
     'start_date': datetime(2017, 10, 9),
-    'email': 'rachel@loftium.com',
+    'email': 'akshay.garg@atoss.com',
     'email_on_failure': False,
     'email_on_retry': False,
     'retries': 3,
     'retry_delay': timedelta(minutes=3),
 }
 
-dag = DAG('dog_retriever',
+dag = DAG('Read_Data',
     schedule_interval='@once',
     default_args=default_args)
 
@@ -37,4 +37,4 @@ t2 = SimpleHttpOperator(
     headers={"Content-Type": "application/json"},
     dag=dag)
     
-t1
+t1 >> t1
