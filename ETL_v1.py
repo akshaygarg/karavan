@@ -22,7 +22,7 @@ dag = DAG('Read_Data',
     default_args=default_args)
 
 t1 = SimpleHttpOperator(
-    task_id='Read Data',
+    task_id='Read_Data',
     method='GET',
     http_conn_id='northwind',
     endpoint='northwind/northwind.svc/Customers?$format=json',
@@ -30,7 +30,7 @@ t1 = SimpleHttpOperator(
     dag=dag)
 
 t2 = SimpleHttpOperator(
-    task_id='Post Data',
+    task_id='Post_Data',
     method='GET',
     http_conn_id='northwind',
     endpoint='northwind/northwind.svc/Customers?$format=json',
