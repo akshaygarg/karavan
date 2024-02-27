@@ -1,6 +1,7 @@
 from airflow import DAG
 from airflow.operators.python_operator import PythonOperator
 from datetime import datetime, timedelta
+from airflow.operators.http_operator import SimpleHttpOperator
 
 def extract():
     # Your extract logic here
