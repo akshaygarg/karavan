@@ -3,6 +3,8 @@ import json
 import pendulum
 from airflow.providers.http.operators.http import SimpleHttpOperator
 from airflow.operators.python import PythonOperator
+import logging
+
 
 from airflow.decorators import dag, task
 @dag(
@@ -28,13 +30,15 @@ def tutorial_taskflow_api_v1():
         pipeline. In this case, getting data is simulated by reading from a
         hardcoded JSON string.
         """
-        SimpleHttpOperator(
+        outResp = SimpleHttpOperator(
           task_id="extract_data",
           http_conn_id='api_product',
           endpoint='products',
           method='GET',
           response_filter=lambda response: json.dumps(response.text)
         )
+
+        logging.info(json.loads(outResp))
       
         data_string = '{"1001": 301.27, "1002": 433.21, "1003": 502.22}'
 
