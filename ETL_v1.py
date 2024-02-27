@@ -35,10 +35,9 @@ def tutorial_taskflow_api_v1():
           http_conn_id='api_product',
           endpoint='products',
           method='GET',
-          response_filter=lambda response: json.dumps(response.text)
+          response_filter=lambda response: json.dumps(response.text),
+          log_response=True
         )
-
-        logging.info(json.loads(outResp))
       
         data_string = '{"1001": 301.27, "1002": 433.21, "1003": 502.22}'
 
