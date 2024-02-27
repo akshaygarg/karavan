@@ -37,4 +37,4 @@ t2 = SimpleHttpOperator(
     headers={"Content-Type": "application/json"},
     dag=dag)
     
-t1 >> t1
+t1 >> t2
