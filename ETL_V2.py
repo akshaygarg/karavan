@@ -4,6 +4,15 @@ from datetime import datetime, timedelta
 
 def extract():
     # Your extract logic here
+    t1 = SimpleHttpOperator(
+    task_id='Read_Data',
+    method='GET',
+    http_conn_id='northwind',
+    endpoint='northwind/northwind.svc/Customers?$format=json',
+    headers={"Content-Type": "application/json"},
+    dag=dag)
+
+    t1()
     pass
 
 def transform():
