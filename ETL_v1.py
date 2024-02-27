@@ -33,11 +33,14 @@ def tutorial_taskflow_api_v1():
         outResp = SimpleHttpOperator(
           task_id="extract_data",
           http_conn_id='api_product',
-          endpoint='products',
           method='GET',
           response_filter=lambda response: json.dumps(response.text),
-          log_response=True
+          log_response=True,
+          xcom_push=True,
+          dag=dag  
         )
+
+        outResp()
       
         data_string = '{"1001": 301.27, "1002": 433.21, "1003": 502.22}'
 
