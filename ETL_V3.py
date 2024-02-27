@@ -33,6 +33,15 @@ with DAG(
                     dag=dag)
     
     def xcom_check(ds, **kwargs):
+        url = "https://jsonplaceholder.typicode.com/posts/1"
+
+        # A GET request to the API
+        response = requests.get("https://services.odata.org/northwind/northwind.svc/Customers?$format=json")
+        
+        # Print the response
+        response_json = response.json()
+        print(response_json)
+        
         val = kwargs['ti'].xcom_pull(key='return_value', task_ids='Read_Data')
         return f"xcom_check has: {kwargs['ti']} and it says: {val}"
      
