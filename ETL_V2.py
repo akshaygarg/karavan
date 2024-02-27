@@ -12,8 +12,6 @@ def extract():
     endpoint='northwind/northwind.svc/Customers?$format=json',
     headers={"Content-Type": "application/json"},
     dag=dag)
-
-    t1()
     pass
 
 def transform():
