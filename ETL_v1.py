@@ -1,38 +1,42 @@
+import airflow
+from airflow import DAG
+from airflow.operators.http_operator import SimpleHttpOperator
+from airflow.operators.sensors import HttpSensor
+from datetime import datetime, timedelta
 import json
 
-import pendulum
-from airflow.providers.http.operators.http import SimpleHttpOperator
-from airflow.operators.python import PythonOperator
-import logging
-from airflow import DAG
-from airflow.operators.bash_operator import BashOperator
-from datetime import datetime, timedelta
 
 
 default_args = {
-    'owner': 'airflow',
+    'owner': 'Loftium',
     'depends_on_past': False,
-    'start_date': datetime(2020, 2, 27),
-    'email': ['ss@asd.com'],
-    'email_on_failure': True,
-    'email_on_retry': True,
-    'retries': 1,
-    'retry_delay': timedelta(seconds=5),
+    'start_date': datetime(2017, 10, 9),
+    'email': 'rachel@loftium.com',
+    'email_on_failure': False,
+    'email_on_retry': False,
+    'retries': 3,
+    'retry_delay': timedelta(minutes=3),
 }
-dag = DAG(
-    'dag1',
-    default_args=default_args,
-    description='A simple tutorial DAG',
-    schedule_interval='@daily',
-)
-t2 = SimpleHttpOperator(
+
+dag = DAG('dog_retriever',
+    schedule_interval='@once',
+    default_args=default_args)
+
+t1 = SimpleHttpOperator(
     task_id='get_labrador',
     method='GET',
     http_conn_id='northwind',
     endpoint='northwind/northwind.svc/Customers?$format=json',
     headers={"Content-Type": "application/json"},
     xcom_push=True,
-    dag=dag
-)
+    dag=dag)
 
-
+t2 = SimpleHttpOperator(
+    task_id='get_breeds',
+    method='GET',
+    http_conn_id='http_default',
+    endpoint='api/breeds/list',
+    headers={"Content-Type": "application/json"},
+    dag=dag)
+    
+t1
