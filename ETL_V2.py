@@ -12,7 +12,7 @@ def extract():
     headers={"Content-Type": "application/json"},
     dag=dag)
 
-    t1()
+    t1
     pass
 
 def transform():
