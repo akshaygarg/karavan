@@ -30,11 +30,10 @@ default_args = {
     'start_date': datetime(2021, 1, 1),
     'email_on_failure': False,
     'email_on_retry': False,
-    'retries': 1,
-    schedule=None
+    'retries': 1
 }
 
-dag = DAG('etl_v2_pipeline', default_args=default_args, schedule_interval=timedelta(days=1))
+dag = DAG('etl_v2_pipeline', default_args=default_args, schedule=None)
 
 extract_task = PythonOperator(task_id='extract', python_callable=extract, dag=dag)
 transform_task = PythonOperator(task_id='transform', python_callable=transform, dag=dag)
