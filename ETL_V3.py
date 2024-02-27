@@ -39,7 +39,7 @@ with DAG(
 
         
         # A GET request to the API
-        response = requests.get(url)
+        response = requests.get(url) + 'northwind/northwind.svc/Customers?$format=json'
         
         # Print the response
         response_json = response.json()
