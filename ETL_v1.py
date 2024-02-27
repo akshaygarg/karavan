@@ -27,7 +27,6 @@ t1 = SimpleHttpOperator(
     http_conn_id='northwind',
     endpoint='northwind/northwind.svc/Customers?$format=json',
     headers={"Content-Type": "application/json"},
-    xcom_push=True,
     dag=dag)
 
 t2 = SimpleHttpOperator(
