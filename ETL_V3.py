@@ -34,12 +34,12 @@ with DAG(
                     dag=dag)
     
     def xcom_check(ds, **kwargs):
-        url = BaseHook.get_connection('northwind').get_uri()
+        url = BaseHook.get_connection('northwind').get_uri() + + 'northwind/northwind.svc/Customers?$format=json';
         print(url)
 
         
         # A GET request to the API
-        response = requests.get(url) + 'northwind/northwind.svc/Customers?$format=json'
+        response = requests.get(url)
         
         # Print the response
         response_json = response.json()
